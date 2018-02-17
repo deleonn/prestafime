@@ -16,7 +16,11 @@ class User extends Model {
     this.addHook('beforeCreate', 'User.hashPassword')
   }
 
-  /**
+  static get hidden() {
+    return ['password']
+  }
+
+  /**2
    * A relationship on tokens is required for auth to
    * work. Since features like `refreshTokens` or
    * `rememberToken` will be saved inside the
@@ -28,6 +32,10 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  role () {
+    return this.belongsTo('App/Models/Role')
   }
 }
 
