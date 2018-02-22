@@ -19,4 +19,6 @@ Route.on('/').render('welcome')
 
 Route.group(() => {
   Route.resource('/users', 'UserController').apiOnly()
+  Route.resource('/clients', 'ClientController').apiOnly()
+  Route.resource('/roles', 'RoleController').apiOnly()
 }).prefix('api')

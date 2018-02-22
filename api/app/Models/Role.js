@@ -4,8 +4,16 @@ const Model = use('Model')
 
 class Role extends Model {
 
-  user () {
-    return this.hasOne('App/Models/User')
+  static get createdAtColumn() {
+    return false
+  }
+
+  static get updatedAtColumn() {
+    return false
+  }
+
+  user() {
+    return this.hasOne("App/Models/User");
   }
 }
 
