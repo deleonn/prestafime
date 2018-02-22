@@ -17,4 +17,6 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-Route.resource('/users', 'UserController')
+Route.group(() => {
+  Route.resource('/users', 'UserController').apiOnly()
+}).prefix('api')
