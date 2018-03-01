@@ -22,4 +22,5 @@ Route.group(() => {
   Route.resource('/clients', 'ClientController').apiOnly()
   Route.resource('/roles', 'RoleController').apiOnly()
   Route.resource('/articles', 'ArticleController').apiOnly()
+  Route.resource('/inventory', 'InventoryController').apiOnly()
 }).prefix('api')
