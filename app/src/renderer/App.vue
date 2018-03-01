@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <sidenav></sidenav>
+    <div class="main-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+  import Sidenav from '@/components/Sidenav/Sidenav'
   export default {
-    name: 'app'
+    name: 'app',
+    components: { Sidenav }
   }
 </script>
 
 <style>
-  /* CSS */
+  .main-content {
+    margin-left: 70px;
+    padding-left: 20px;
+    padding-top: 20px;
+  }
 </style>
