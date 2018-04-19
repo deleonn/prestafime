@@ -1,9 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Inventory from '@/components/Inventory/Inventory'
+import { LoansList } from '@/components/Loans'
+import { InventoryList } from '@/components/Inventory'
+import { ClientsList } from '@/components/Clients'
 
-Vue.use(Router)
+Vue.use(Router, {
+  theme: {
+    primary: '#7CB342',
+    secondary: '#33691E',
+    accent: '#FF8F00',
+    error: '#f44336',
+    warning: '#ffeb3b',
+    info: '#2196f3',
+    success: '#4caf50'
+  }
+})
 
 export default new Router({
   routes: [
@@ -13,9 +25,19 @@ export default new Router({
       component: Home
     },
     {
+      path: '/loans',
+      name: 'loanslist',
+      component: LoansList
+    },
+    {
       path: '/inventory',
       name: 'inventory',
-      component: Inventory
+      component: InventoryList
+    },
+    {
+      path: '/clients',
+      name: 'clients',
+      component: ClientsList
     },
     {
       path: '*',

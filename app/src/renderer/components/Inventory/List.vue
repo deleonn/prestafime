@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'inventory',
+    name: 'InventoryList',
     mounted () {
       this.logThis()
     },
