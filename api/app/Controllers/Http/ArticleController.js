@@ -4,11 +4,19 @@ const Article = use('App/Models/Article')
 const { validateAll } = use('Validator')
 
 class ArticleController {
-	index(){
-		const articles = Article.query().fetch()
+  async index ({ request }) {
+    const query = request.get()
+    const articles = await Article.query().paginate(query.page, 10)
 
-		return articles
-	}
+    return articles
+  }
+
+  async unpaginated ({ request }) {
+    const query = request.get()
+    const articles = await Article.query().fetch()
+
+    return articles
+  }
 
 	show({ params }){
 		const article = Article.find(params.id)

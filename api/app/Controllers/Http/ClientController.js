@@ -1,73 +1,81 @@
 'use strict'
 const Client = use('App/Models/Client')
-const { validateAll } = use("Validator");
+const { validateAll } = use('Validator')
 
 class ClientController {
-  async index () {
-    const clients = await Client.all()
+  async index({ request }) {
+    const query = request.get();
+    const clients = await Client.query().paginate(query.page, 10);
 
-    return clients
+    return clients;
   }
 
-  async show ({ params }) {
-    const client = await Client.find(params.id)
+  async unpaginated({ request }) {
+    const query = request.get();
+    const clients = await Client.query().fetch();
 
-    return client
+    return clients;
   }
 
-  async store ({ request }) {
+  async show({ params }) {
+    const client = await Client.find(params.id);
+
+    return client;
+  }
+
+  async store({ request }) {
     const rules = {
-      name: 'required',
-      email: 'required|email',
-      phone_number: 'required'
-    }
+      name: "required",
+      email: "required|email",
+      phone_number: "required"
+    };
 
-    const validation = await validateAll(request.all(), rules)
+    const validation = await validateAll(request.all(), rules);
 
     if (validation.fails()) {
-      return validation.messages()
+      return validation.messages();
     }
 
-    const clientData = request.only(['name', 'phone_number', 'email'])
-    const client = await Client.create(clientData)
-    return client
+    const clientData = request.only(["name", "phone_number", "email"]);
+    const client = await Client.create(clientData);
+    return client;
   }
 
-  async update ({ params, request }) {
-    const client = await Client.find(params.id)
+  async update({ params, request }) {
+    const client = await Client.find(params.id);
 
     const rules = {
-      name: 'required',
-      email: 'required|email',
-      phone_number: 'required'
-    }
+      name: "required",
+      email: "required|email",
+      phone_number: "required"
+    };
 
-    const validation = await validateAll(request.all(), rules)
+    const validation = await validateAll(request.all(), rules);
 
     if (validation.fails()) {
-      return validation.messages()
+      return validation.messages();
     }
 
-    if (client.name != request.input('name')) {
-      client.name = request.input('name')
+    if (client.name != request.input("name")) {
+      client.name = request.input("name");
     }
 
-    if (client.email != request.input('email')) {
-      client.email = request.input('email')
+    if (client.email != request.input("email")) {
+      client.email = request.input("email");
     }
 
     if (client.phone_number != request.input("phone_number")) {
       client.phone_number = request.input("phone_number");
     }
 
-    await Client.save()
-    return client
+    await Client.save();
+    return client;
   }
 
-  async destroy ({ params }) {
-    const client = await Client.find(params.id)
+  async destroy({ params }) {
+    const client = await Client.find(params.id);
 
-    await client.delete()
+    await client.delete();
   }
 }
 

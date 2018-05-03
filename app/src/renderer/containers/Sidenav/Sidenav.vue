@@ -1,16 +1,11 @@
 <template>
-  <v-navigation-drawer stateless hide-overlay :mini-variant="mini" v-model="drawer" class="sidenav" fixed>
+  <v-navigation-drawer stateless hide-overlay :mini-variant="mini" v-model="drawer" class="sidenav elevation-1" fixed>
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
         <v-list-tile avatar>
           <v-list-tile-avatar>
             <v-icon color="secondary">pets</v-icon>
           </v-list-tile-avatar>
-          <v-list-tile-action>
-            <v-btn icon @click.native.stop="mini = !mini">
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
-          </v-list-tile-action>
         </v-list-tile>
       </v-list>
     </v-toolbar>
@@ -48,8 +43,8 @@
           { title: 'Préstamos', icon: 'book', route: '/loans' },
           { title: 'Artículos', icon: 'widgets', route: '/articles' },
           { title: 'Inventario', icon: 'storage', route: '/inventory' },
-          { title: 'Clientes', icon: 'people', route: '/clients' },
-          { title: 'Usuarios', icon: 'account_circle', route: '/users' }
+          { title: 'Clientes', icon: 'people', route: '/clients' }
+          // { title: 'Usuarios', icon: 'account_circle', route: '/users' }
         ],
         mini: true,
         right: null,

@@ -18,9 +18,13 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 
 Route.group(() => {
+  Route.get('/articles/unpaginated', 'ArticleController.unpaginated')
+  Route.get('/clients/unpaginated', 'ClientController.unpaginated')
+
   Route.resource('/users', 'UserController').apiOnly()
   Route.resource('/clients', 'ClientController').apiOnly()
   Route.resource('/roles', 'RoleController').apiOnly()
   Route.resource('/articles', 'ArticleController').apiOnly()
   Route.resource('/inventory', 'InventoryController').apiOnly()
 }).prefix('api')
+
