@@ -26,7 +26,7 @@
                   <v-flex xs7>
                     <div>
                       <div class="headline">Préstamos</div>
-                      <div>12</div>
+                      <div>{{loans.length}}</div>
                     </div>
                   </v-flex>
                 </v-layout>
@@ -54,18 +54,21 @@
 <script>
 import * as articlesService from '@/services/articles'
 import * as clientsService from '@/services/clients'
+import * as loansService from '@/services/loans'
 
 export default {
   name: 'home',
   data () {
     return {
       articles: [],
-      clients: []
+      clients: [],
+      loans: []
     }
   },
   created () {
     this.getArticles()
     this.getClients()
+    this.getLoans()
   },
   methods: {
     open (link) {
@@ -81,6 +84,12 @@ export default {
       clientsService.unpaginated()
         .then(res => {
           this.clients = res.data
+        })
+    },
+    getLoans () {
+      loansService.unpaginated()
+        .then(res => {
+          this.loans = res.data
         })
     }
   }

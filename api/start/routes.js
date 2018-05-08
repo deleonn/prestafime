@@ -20,12 +20,13 @@ Route.on('/').render('welcome')
 Route.group(() => {
   Route.get('/articles/unpaginated', 'ArticleController.unpaginated')
   Route.get('/clients/unpaginated', 'ClientController.unpaginated')
+  Route.get('/loans/unpaginated', 'LoanController.unpaginated')
 
   Route.resource('/users', 'UserController').apiOnly()
   Route.resource('/clients', 'ClientController').apiOnly()
   Route.resource('/roles', 'RoleController').apiOnly()
   Route.resource('/articles', 'ArticleController').apiOnly()
   Route.resource('/inventory', 'InventoryController').apiOnly()
-  Route.resource('/loan', 'LoanController').apiOnly()
+  Route.resource('/loans', 'LoanController').apiOnly()
 }).prefix('api')
 

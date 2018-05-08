@@ -37,6 +37,7 @@ class User extends Model {
   role () {
     return this.belongsTo('App/Models/Role')
   }
+
 }
 
 module.exports = User
