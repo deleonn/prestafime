@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import { LoansList } from '@/components/Loans'
-import { InventoryList } from '@/components/Inventory'
-import { ClientsList } from '@/components/Clients'
+import Home from '@/containers/Home'
+import { LoansList } from '@/containers/Loans'
+import { InventoryList } from '@/containers/Inventory'
+import { ClientsList } from '@/containers/Clients'
+import { ArticlesList } from '@/containers/Articles'
 
 Vue.use(Router, {
   theme: {
@@ -28,6 +29,11 @@ export default new Router({
       path: '/loans',
       name: 'loanslist',
       component: LoansList
+    },
+    {
+      path: '/articles',
+      name: 'articleslist',
+      component: ArticlesList
     },
     {
       path: '/inventory',

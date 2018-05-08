@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import Sidenav from '@/components/Sidenav/Sidenav'
+  import Sidenav from '@/containers/Sidenav/Sidenav'
   export default {
     name: 'app',
     components: { Sidenav },
