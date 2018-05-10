@@ -23,6 +23,11 @@
           <td>{{ props.item.articles[0].name }}</td>
           <td>{{ props.item.articles[0].description }}</td>
           <td class="text-xs-right">{{ moment(props.item.created_at).format('ddd[,] DD [de] MMMM [del] YYYY') }}</td>
+          <td class="justify-center layout px-0">
+            <v-btn icon class="mx-0" @click="checkItem(props.item)">
+              <v-icon color="teal">check</v-icon>
+            </v-btn>
+          </td>
         </template>
       </v-data-table>
       <v-btn
@@ -50,6 +55,7 @@
 import moment from 'moment'
 import * as loansService from '@/services/loans'
 import LoanCreate from './Create'
+import confirm from '@/services/confirm'
 
 moment.locale('es')
 
@@ -69,7 +75,8 @@ export default {
         {text: 'Nombre del cliente', value: 'client'},
         {text: 'Artículo prestado', value: 'article'},
         {text: 'Descripción del artículo', value: 'description'},
-        {text: 'Fecha de creación', value: 'created_at'}
+        {text: 'Fecha de creación', value: 'created_at'},
+        {text: 'Acciones', value: 'actions'}
       ],
       loading: false,
       totalItems: 0,
@@ -98,6 +105,19 @@ export default {
           this.loading = false
           this.error = err
         })
+    },
+    checkItem () {
+      confirm.show({
+        title: '¿Deseas marcar este préstamo como entregado?',
+        text: 'Esta acción no se puede revertir.',
+        persistent: true
+      }).then(res => {
+        console.log(res)
+        alert('true')
+      }).catch(err => {
+        console.warn(err)
+        alert('false')
+      })
     },
     openNewLoanDialog () {
       this.newLoanVisible = true

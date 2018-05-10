@@ -6,7 +6,7 @@ const defaultOptions = {
   title: '',
   persistent: false,
   maxWidth: '700px',
-  type: 'alert'
+  type: 'confirm'
 }
 
 let dialogComp = null
