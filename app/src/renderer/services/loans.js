@@ -8,6 +8,10 @@ export const unpaginated = () => {
   return api.get(`/loans/unpaginated`)
 }
 
-export const create = (client) => {
-  return api.post(`/loans`, client)
+export const create = (loan) => {
+  return api.post(`/loans`, loan)
+}
+
+export const completeLoan = (loan) => {
+  return api.post(`/loans/completeLoan`, loan)
 }

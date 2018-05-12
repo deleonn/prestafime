@@ -1,55 +1,61 @@
 import Vue from 'vue'
-import Dialog from '@/components/Dialog'
+import Toast from '@/components/Toast'
+
+const colors = ['success', 'info', 'error']
 
 const defaultOptions = {
   text: '',
-  title: '',
-  persistent: false,
-  maxWidth: '700px',
-  type: 'alert'
+  icon: '',
+  color: null,
+  timeout: 3000,
+  dismissible: true,
+  positionY: 'top',
+  positionX: 'right'
 }
 
-let dialogComp = null
+let toastCmp = null
 
-function createDialogComp () {
-  const comp = new Vue(Dialog)
+function createToastCmp () {
+  const cmp = new Vue(Toast)
 
-  document.body.appendChild(comp.$mount().$el)
+  document.body.appendChild(cmp.$mount().$el)
 
-  return comp
+  return cmp
 }
 
-function getDialogComp () {
-  if (!dialogComp) {
-    dialogComp = createDialogComp()
+function getToastCmp () {
+  if (!toastCmp) {
+    toastCmp = createToastCmp()
   }
 
-  return dialogComp
+  return toastCmp
 }
 
 function show (options = {}) {
-  return new Promise((resolve, reject) => {
-    let dialog = getDialogComp()
-    dialog.show({
-      ...defaultOptions,
-      ...options
-    })
-    dialog.$on('canceled', function () {
-      reject(new Error(true))
-    })
-    dialog.$on('accepted', function () {
-      resolve(true)
-    })
+  getToastCmp().show({ ...defaultOptions,
+    ...options
   })
 }
 
 function close () {
-  getDialogComp().close()
+  getToastCmp().close()
+}
+
+function createShorthands () {
+  const shorthands = {}
+
+  colors.forEach(color => (shorthands[color] = (options = {}) => show({
+    color,
+    ...options
+  })))
+
+  return shorthands
 }
 
 export default {
   show,
   close,
-  getDialogComp,
-  defaultOptions
+  getToastCmp,
+  defaultOptions,
+  ...createShorthands()
 }

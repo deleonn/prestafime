@@ -21,6 +21,7 @@ Route.group(() => {
   Route.get('/articles/unpaginated', 'ArticleController.unpaginated')
   Route.get('/clients/unpaginated', 'ClientController.unpaginated')
   Route.get('/loans/unpaginated', 'LoanController.unpaginated')
+  Route.post('/loans/completeLoan', 'LoanController.completeLoan')
 
   Route.resource('/users', 'UserController').apiOnly()
   Route.resource('/clients', 'ClientController').apiOnly()

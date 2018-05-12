@@ -56,6 +56,7 @@ import moment from 'moment'
 import * as loansService from '@/services/loans'
 import LoanCreate from './Create'
 import confirm from '@/services/confirm'
+import toast from '@/services/toast'
 
 moment.locale('es')
 
@@ -106,17 +107,33 @@ export default {
           this.error = err
         })
     },
-    checkItem () {
+    checkItem (loan) {
+      this.loading = true
       confirm.show({
         title: '¿Deseas marcar este préstamo como entregado?',
         text: 'Esta acción no se puede revertir.',
         persistent: true
       }).then(res => {
-        console.log(res)
-        alert('true')
+        loansService.completeLoan(loan)
+          .then(res => {
+            this.loading = false
+            this.closeNewLoanDialog()
+            this.getLoans()
+            toast.show({
+              text: 'El préstamo se ha completado correctamente'
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            this.loading = false
+            toast.show({
+              text: 'Ocurrió un error. Inténtalo de nuevo',
+              color: 'error'
+            })
+          })
       }).catch(err => {
         console.warn(err)
-        alert('false')
+        this.loading = false
       })
     },
     openNewLoanDialog () {
