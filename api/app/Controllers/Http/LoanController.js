@@ -33,12 +33,17 @@ class LoanController {
 
 		if(validation.fails()){
 			return response.status(401).json(validation.messages())
-		}
+    }
 
-    const loanData = request.only(['client_id'])
+    const client = request.only(['client_id'])
+
+    const loan = new Loan()
+    loan.client_id = client.client_id
+    loan.active = 1
+
+    await loan.save()
+
     const article = request.only(['article_id'])
-
-    const loan = await Loan.create(loanData)
 
     await loan.articles().attach([article.article_id, loan.id])
 

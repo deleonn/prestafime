@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "PrestaFIME",
+  "version": "1.0.0",
   "author": "deleonn <joel.dl08@gmail.com>",
   "description": "Prestafime desktop app",
   "license": null,
@@ -19,7 +19,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "app",
+    "productName": "PrestaFIME",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"

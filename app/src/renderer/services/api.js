@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const URL = 'http://localhost:3333/api'
+// const URL = 'http://prestafime.hyprlabs.com/api'
 
 export const api = axios.create({
   baseURL: URL,
